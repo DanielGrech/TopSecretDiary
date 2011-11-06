@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="panel">#FFFFFF</color>
+	<color name="window_background">#CCE0FF</color>
+	<color name="actionbar_start">#4C4C4C</color>
+	<color name="actionbar_end">#2B2B2B</color>
+    <color name="pager_indicator_line">#990000</color>
+    <color name="pager_indicator_background">#666666</color>
+    <color name="pager_indicator_text">#858585</color>
+	<color name="pager_indicator_selected_text">#FFFFFF</color>
+    <color name="edit_entry_title">#990000</color>
+    <color name="edit_entry_description">#666666</color>
+    <color name="horizontal_line">#DEDEDE</color>
+    <color name="new_tag_section">#DEDEDE</color>
+    <color name="entrylist_text">#666666</color>
+    <color name="entry_list_title">#990000</color>
+</resources>

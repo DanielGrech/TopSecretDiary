@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/container"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:orientation="vertical"
+      android:padding="10px"
+      android:background="@color/panel">
+
+      <TextView
+           android:id="@+id/label_Date"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:gravity="center"
+           android:textAppearance="@style/EditEntryDescription" />
+
+      <TextView
+           android:id="@+id/label_Title"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:textAppearance="@style/EditEntryTitle"
+           android:text="Entry Title" />
+
+      <TextView
+           android:id="@+id/label_desc_Title"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:textAppearance="@style/EditEntryDescription"
+           android:text="Enter the title for this new entry" />
+
+      <EditText
+           android:id="@+id/title"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:imeOptions="actionNext"
+           android:layout_gravity="center"
+           android:singleLine="true"
+           android:gravity="top|left"/>
+
+      <TextView
+           android:id="@+id/label_Text"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:textAppearance="@style/EditEntryTitle"
+           android:text="Entry Text" />
+
+      <TextView
+           android:id="@+id/label_desc_Text"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:textAppearance="@style/EditEntryDescription"
+           android:text="Enter the text for this new diary entry" />
+
+      <EditText
+           android:id="@+id/text"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+           android:layout_gravity="center"
+           android:gravity="top|left"/>
+</LinearLayout>

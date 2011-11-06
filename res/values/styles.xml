@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<style name="custom_edittext" parent="@android:style/Widget.EditText">
+	 	<item name="android:background">@drawable/custom_edit_text</item>
+	</style>
+
+    <style name="EditEntryTitle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/edit_entry_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="EditEntryDescription" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/edit_entry_description</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+</resources>
