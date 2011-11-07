@@ -1,0 +1,5 @@
+*.class
+*.apk
+*.res
+*.dex
+*.unaligned
