@@ -2,6 +2,7 @@ package com.DGSD.SecretDiary.Activity.Phone;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.DGSD.SecretDiary.Activity.BaseActivity;
+import com.DGSD.SecretDiary.Activity.EntryListChoice;
 import com.DGSD.SecretDiary.Encryption;
 import com.DGSD.SecretDiary.R;
 import com.DGSD.SecretDiary.SecretDiaryApplication;
@@ -125,7 +127,7 @@ public class FirstLoginActivity extends BaseActivity {
 
 					mPrefs.edit().putBoolean(SecretDiaryApplication.KEY_HAS_LOGGED_IN_BEFORE, true).commit();
 					
-					//startActivity(new Intent(FirstLoginActivity.this, EntryListActivity.class));
+					startActivity(new Intent(FirstLoginActivity.this, EntryListChoice.class));
 					finish();
 				} catch(Exception e) {
 					Toast.makeText(FirstLoginActivity.this, 
