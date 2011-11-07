@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map_container"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    <com.DGSD.SecretDiary.UI.LocationControlBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:paddingTop="8dip"
+        android:gravity="center_horizontal"
+        android:background="#AA000000"/>
+</FrameLayout>

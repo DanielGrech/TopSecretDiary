@@ -1,4 +1,4 @@
-package com.DGSD.SecretDiary;
+package com.DGSD.SecretDiary.UI;
 
 import android.app.Dialog;
 import android.content.Context;

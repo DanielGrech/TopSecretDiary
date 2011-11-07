@@ -12,10 +12,12 @@ import android.widget.Toast;
 import com.DGSD.SecretDiary.Activity.BaseActivity;
 import com.DGSD.SecretDiary.Data.Database;
 import com.DGSD.SecretDiary.Data.EntryProvider;
+import com.DGSD.SecretDiary.Fragment.EditEntryLocationFragment;
 import com.DGSD.SecretDiary.Fragment.EditEntryTagFragment;
 import com.DGSD.SecretDiary.Fragment.EditEntryTextFragment;
 import com.DGSD.SecretDiary.R;
 import com.DGSD.SecretDiary.Utils;
+import com.google.android.maps.MapView;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
 import greendroid.widget.ActionBar;
@@ -51,6 +53,10 @@ public class EditEntryActivity extends BaseActivity {
 
     private FragmentAdapter mAdapter;
 
+    //We can only have 1 mapview per activity, so we need to keep it here
+    public MapView mMapView;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,8 @@ public class EditEntryActivity extends BaseActivity {
         if(b.containsKey(Database.Field.ID)) {
             mEntryId = (Integer) b.get(Database.Field.ID);
         }
+
+	    setMapView( new MapView(this, getResources().getString(R.string.maps_key_debug)) );
 
         mIsUpdate = b.getBoolean(Utils.EXTRA.UPDATE, false);
 
@@ -122,8 +130,19 @@ public class EditEntryActivity extends BaseActivity {
                              i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
                     break;
                 case LOCATION_DETAILS:
-                    f = EditEntryTextFragment.newInstance(i.getStringExtra(Database.Field.TITLE),
-                             i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
+                    Double lat = null, lon = null;
+
+                    try {
+                       lat = Double.valueOf(i.getStringExtra(Database.Field.LAT));
+                       lon = Double.valueOf(i.getStringExtra(Database.Field.LONG));
+                    } catch(Exception e) {
+                       //o well..
+                    }
+                    if(lat == null || lon == null) {
+                        f = EditEntryLocationFragment.newInstance(null, null);
+                    } else {
+                        f = EditEntryLocationFragment.newInstance(lat, lon);
+                    }
                     break;
             }
 
@@ -138,6 +157,8 @@ public class EditEntryActivity extends BaseActivity {
                 //Using instantiateItem as a hack to get already instantiated fragment
                 final EditEntryTextFragment textFragment = (EditEntryTextFragment) mAdapter.instantiateItem(mPager, TEXT_DETAILS);
                 final EditEntryTagFragment tagFragment = (EditEntryTagFragment) mAdapter.instantiateItem(mPager, TAG_DETAILS);
+                final EditEntryLocationFragment locationFragment = (EditEntryLocationFragment) mAdapter.instantiateItem(mPager, LOCATION_DETAILS);
+
                 Database.ArgumentBuilder builder = new Database.ArgumentBuilder();
 
                 builder.add(Database.Field.TITLE, textFragment.getTitle());
@@ -147,8 +168,8 @@ public class EditEntryActivity extends BaseActivity {
                 builder.add(Database.Field.RECORDINGS,"");
                 builder.add(Database.Field.TAGS, tagFragment.getTags());
                 builder.add(Database.Field.FILES,"");
-                builder.add(Database.Field.LAT,"");
-                builder.add(Database.Field.LONG,"");
+                builder.add(Database.Field.LAT, locationFragment.getLatitude() == null ? "" : String.valueOf(locationFragment.getLatitude()));
+                builder.add(Database.Field.LONG,locationFragment.getLongitude() == null ? "" : String.valueOf(locationFragment.getLongitude()));
 
                 try {
                     if(mIsUpdate) {
@@ -173,5 +194,27 @@ public class EditEntryActivity extends BaseActivity {
         }
         return true;
     }
+
+    @Override
+	public void onDestroy() {
+		mMapView = null;
+
+		super.onDestroy();
+	}
+
+    public MapView getMapView() {
+        return mMapView;
+    }
+
+    public void setMapView(MapView m) {
+        if(mMapView != null) {
+            Log.e(TAG, "Attemping to set a second map view. Ignoring");
+            return;
+        }
+		mMapView = m;
+		mMapView.setClickable(true);
+		mMapView.setBuiltInZoomControls(true);
+		mMapView.getController().setZoom(12);
+	}
 
 }

@@ -24,6 +24,7 @@ public class MainActivity extends Activity{
 		mPrefs =  getSharedPreferences(SecretDiaryApplication.KEY_MY_PREFERENCES, 0);
 		
 		Intent intent;
+
 		if( hasLoggedInBefore() ) {
 			intent = new Intent(this, LoginActivity.class);
 		} else {

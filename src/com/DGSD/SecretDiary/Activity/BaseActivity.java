@@ -254,7 +254,7 @@ public class BaseActivity extends FragmentActivity implements ActionBarActivity 
      * </p>
      *
      * @param view The desired content to display.
-     * @param params Layout parameters for the view.
+     * @param params UI parameters for the view.
      * @see #setActionBarContentView(View)
      * @see #setActionBarContentView(int)
      */

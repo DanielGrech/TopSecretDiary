@@ -8,11 +8,11 @@
 
     <application
         android:icon="@drawable/icon"
-        android:label="@string/app_name" 
+        android:label="@string/app_name"
         android:theme="@style/Theme.SecretDiary"
         android:name=".SecretDiaryApplication"
         android:windowSoftInputMode="adjustPan" >
-        
+
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,14 @@
         <activity android:name=".Activity.Phone.EntryListActivity" />
         <activity android:name=".Activity.Phone.EditEntryActivity" android:windowSoftInputMode="stateHidden" />
 
+        <!-- Libraries -->
+        <uses-library android:name="com.google.android.maps" />
+
+
     </application>
-    
+
+    <!-- Permissions needed -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
