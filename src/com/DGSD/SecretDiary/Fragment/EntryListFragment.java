@@ -3,6 +3,7 @@ package com.DGSD.SecretDiary.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -58,6 +59,9 @@ public class EntryListFragment extends ListFragment implements LoaderManager.Loa
 
         // Give some text to display if there is no data.
         setEmptyText("No entries found");
+
+        getListView().setDivider(new ColorDrawable(getActivity().getResources().getColor(R.color.horizontal_line)));
+        getListView().setDividerHeight(1);
 
         // Create an empty adapter we will use to display the loaded data.
         mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.entrylist_item, null, FROM, TO, 0);
