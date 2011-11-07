@@ -3,3 +3,4 @@
 *.res
 *.dex
 *.unaligned
+bin/*
