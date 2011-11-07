@@ -36,7 +36,7 @@
         <activity android:name=".Activity.Phone.FirstLoginActivity" />
         <activity android:name=".Activity.Phone.LoginActivity" />
         <activity android:name=".Activity.Phone.EntryListActivity" />
-        <activity android:name=".Activity.Phone.EditEntryActivity" android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.Phone.EditEntryActivity" android:windowSoftInputMode="adjustPan" />
 
         <!-- Libraries -->
         <uses-library android:name="com.google.android.maps" />

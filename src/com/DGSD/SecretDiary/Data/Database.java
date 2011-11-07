@@ -7,6 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.DGSD.SecretDiary.Encryption;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created By: Daniel Grech
@@ -178,5 +182,23 @@ public class Database {
         public ContentValues build() {
             return values;
         }
+    }
+
+    public static ContentValues encryptValues(String password, ContentValues input) throws Exception{
+        if(input == null) {
+            return null;
+        }
+
+        Set<Map.Entry<String, Object>> vals=input.valueSet();
+
+        ContentValues retval = new ContentValues();
+        for (Map.Entry<String, Object> entry : vals) {
+            //Encrypt all entries except for id
+            if(entry.getKey() != Database.Field.ID) {
+                retval.put(entry.getKey(), Encryption.encrypt(password, (String) entry.getValue()));
+            }
+        }
+
+        return retval;
     }
 }

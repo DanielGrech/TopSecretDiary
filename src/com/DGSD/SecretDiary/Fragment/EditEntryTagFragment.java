@@ -13,12 +13,14 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.DGSD.SecretDiary.Data.Database;
 import com.DGSD.SecretDiary.Data.TagProvider;
+import com.DGSD.SecretDiary.Encryption;
 import com.DGSD.SecretDiary.R;
 import com.DGSD.SecretDiary.SecretDiaryApplication;
 import com.DGSD.SecretDiary.Utils;
@@ -36,6 +38,8 @@ public class EditEntryTagFragment extends DialogFragment
     private static final String TAG = EditEntryTagFragment.class.getSimpleName();
 
     protected SecretDiaryApplication mApplication;
+
+    protected String mPwd;
 
     private SimpleCursorAdapter mAdapter;
 
@@ -123,11 +127,26 @@ public class EditEntryTagFragment extends DialogFragment
             }
         });
 
+        mNewTagName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (event != null && event.getAction() != KeyEvent.ACTION_DOWN) {
+					return false;
+				} else{
+                    if(mNewTagName.getText() != null &&
+                            mNewTagName.getText().toString().replaceAll("\\n","").length() > 0) {
+                        mNewTagButton.performClick();
+                    }
+
+                    return true;
+				}
+			}
+		});
+
         mNewTagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Database.ArgumentBuilder builder = new Database.ArgumentBuilder();
-                builder.add(Database.Field.TAG_NAME, mNewTagName.getText().toString());
+                builder.add(Database.Field.TAG_NAME, mNewTagName.getText().toString().replaceAll("\\n",""));
                 builder.add(Database.Field.TAG_COLOR, Integer.toString(mLastSelectedColor));
                 try {
 
@@ -148,6 +167,10 @@ public class EditEntryTagFragment extends DialogFragment
                         Toast.makeText(getActivity(), "New Tag saved", Toast.LENGTH_SHORT).show();
                     }
 
+                    //Reset the text field
+                    Utils.hideKeyboard(mNewTagName);
+                    mNewTagName.setText("");
+
                     //Reset the tag color
                     mLastSelectedColor = Color.BLACK;
                 } catch(Exception e) {
@@ -165,6 +188,8 @@ public class EditEntryTagFragment extends DialogFragment
         super.onActivityCreated(savedInstanceState);
 
         mApplication = (SecretDiaryApplication) getActivity().getApplication();
+
+        mPwd = mApplication.getPassword();
 
         // Create an empty adapter we will use to display the loaded data.
         mAdapter = new TagAdapter(FROM, TO);
@@ -253,14 +278,17 @@ public class EditEntryTagFragment extends DialogFragment
             final String color = cursor.getString(color_column);
 
             ViewHolder vh = (ViewHolder) view.getTag();
+            try {
+                vh.checked_text.setText(Encryption.decrypt(mPwd,name));
+                vh.checked_text.setTextColor(Integer.valueOf(Encryption.decrypt(mPwd,color)));
 
-            vh.checked_text.setText(name);
-            vh.checked_text.setTextColor(Integer.valueOf(color));
-
-            if(tags.contains(name)) {
-                mListView.setItemChecked(cursor.getPosition(), true);
-            } else {
-                mListView.setItemChecked(cursor.getPosition(), false);
+                if(tags.contains(Encryption.decrypt(mPwd,name))) {
+                    mListView.setItemChecked(cursor.getPosition(), true);
+                } else {
+                    mListView.setItemChecked(cursor.getPosition(), false);
+                }
+            } catch(Exception e) {
+                Log.e(TAG, "Error binding view: " + Log.getStackTraceString(e));
             }
         }
     }

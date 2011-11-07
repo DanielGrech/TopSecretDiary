@@ -172,6 +172,7 @@ public class EditEntryActivity extends BaseActivity {
                 builder.add(Database.Field.LONG,locationFragment.getLongitude() == null ? "" : String.valueOf(locationFragment.getLongitude()));
 
                 try {
+                    boolean has_error = false;
                     if(mIsUpdate) {
                         //Update existing item
                         getContentResolver().update(
@@ -180,10 +181,17 @@ public class EditEntryActivity extends BaseActivity {
                         Toast.makeText(this, "Entry Updated", Toast.LENGTH_SHORT).show();
                     }   else {
                         //Insert a new item
-                        getContentResolver().insert(EntryProvider.CONTENT_URI, builder.build());
-                        Toast.makeText(this, "New Entry saved", Toast.LENGTH_SHORT).show();
+                        Uri retval = getContentResolver().insert(EntryProvider.CONTENT_URI, builder.build());
+                        if(retval != null) {
+                            Toast.makeText(this, "New Entry saved", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Error creating new entry saved", Toast.LENGTH_SHORT).show();
+                            has_error = true;
+                        }
                     }
-                    finish();
+                    if(!has_error) {
+                        finish();
+                    }
                 } catch(Exception e) {
                     Log.e(TAG, e.toString());
                     Toast.makeText(this, "Error saving entry. Please try again", Toast.LENGTH_SHORT).show();
