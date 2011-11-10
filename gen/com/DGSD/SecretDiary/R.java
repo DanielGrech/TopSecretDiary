@@ -9,19 +9,21 @@ package com.DGSD.SecretDiary;
 
 public final class R {
     public static final class anim {
-        public static final int gd_grow_from_bottom=0x7f040000;
-        public static final int gd_grow_from_bottomleft_to_topright=0x7f040001;
-        public static final int gd_grow_from_bottomright_to_topleft=0x7f040002;
-        public static final int gd_grow_from_top=0x7f040003;
-        public static final int gd_grow_from_topleft_to_bottomright=0x7f040004;
-        public static final int gd_grow_from_topright_to_bottomleft=0x7f040005;
-        public static final int gd_rack=0x7f040006;
-        public static final int gd_shrink_from_bottom=0x7f040007;
-        public static final int gd_shrink_from_bottomleft_to_topright=0x7f040008;
-        public static final int gd_shrink_from_bottomright_to_topleft=0x7f040009;
-        public static final int gd_shrink_from_top=0x7f04000a;
-        public static final int gd_shrink_from_topleft_to_bottomright=0x7f04000b;
-        public static final int gd_shrink_from_topright_to_bottomleft=0x7f04000c;
+        public static final int action_bar_scale=0x7f040000;
+        public static final int gd_grow_from_bottom=0x7f040001;
+        public static final int gd_grow_from_bottomleft_to_topright=0x7f040002;
+        public static final int gd_grow_from_bottomright_to_topleft=0x7f040003;
+        public static final int gd_grow_from_top=0x7f040004;
+        public static final int gd_grow_from_topleft_to_bottomright=0x7f040005;
+        public static final int gd_grow_from_topright_to_bottomleft=0x7f040006;
+        public static final int gd_rack=0x7f040007;
+        public static final int gd_shrink_from_bottom=0x7f040008;
+        public static final int gd_shrink_from_bottomleft_to_topright=0x7f040009;
+        public static final int gd_shrink_from_bottomright_to_topleft=0x7f04000a;
+        public static final int gd_shrink_from_top=0x7f04000b;
+        public static final int gd_shrink_from_topleft_to_bottomright=0x7f04000c;
+        public static final int gd_shrink_from_topright_to_bottomleft=0x7f04000d;
+        public static final int layout_animation=0x7f04000e;
     }
     public static final class attr {
         /** <p>Must be an integer value, such as "<code>100</code>".
@@ -984,12 +986,10 @@ containing a value of this type.
     public static final class id {
         public static final int bottom=0x7f050008;
         public static final int btn_AddNewTag=0x7f050023;
-        public static final int btn_SetCurrentLocation=0x7f05004b;
-        public static final int btn_openInMaps=0x7f05004c;
         public static final int center=0x7f05000d;
         public static final int center_horizontal=0x7f05000c;
         public static final int center_vertical=0x7f05000b;
-        public static final int checkedTextBox=0x7f05004e;
+        public static final int checkedTextBox=0x7f05004c;
         public static final int container=0x7f05001d;
         public static final int dashboard=0x7f050001;
         public static final int date=0x7f05002f;
@@ -1057,7 +1057,7 @@ containing a value of this type.
         public static final int top=0x7f050007;
         public static final int triangle=0x7f050018;
         public static final int underline=0x7f050019;
-        public static final int unlock=0x7f05004d;
+        public static final int unlock=0x7f05004b;
         public static final int value_text=0x7f050031;
         public static final int vertical=0x7f050016;
         public static final int xhdpi=0x7f050006;
@@ -1104,43 +1104,43 @@ containing a value of this type.
         public static final int gd_tab_indicator=0x7f030022;
         public static final int gd_text_item_view=0x7f030023;
         public static final int gd_thumbnail_item_view=0x7f030024;
-        public static final int location_control_bar=0x7f030025;
-        public static final int login=0x7f030026;
-        public static final int taglist_item=0x7f030027;
+        public static final int login=0x7f030025;
+        public static final int taglist_item=0x7f030026;
     }
     public static final class string {
-        public static final int app_name=0x7f08001c;
-        public static final int gd_add=0x7f08000b;
-        public static final int gd_all_friends=0x7f080017;
-        public static final int gd_compass=0x7f080010;
-        public static final int gd_compose=0x7f080003;
-        public static final int gd_edit=0x7f08000a;
-        public static final int gd_export=0x7f080004;
-        public static final int gd_eye=0x7f080016;
-        public static final int gd_gallery=0x7f080019;
+        public static final int app_name=0x7f08001d;
+        public static final int gd_add=0x7f08000c;
+        public static final int gd_all_friends=0x7f080018;
+        public static final int gd_compass=0x7f080011;
+        public static final int gd_compose=0x7f080004;
+        public static final int gd_edit=0x7f08000b;
+        public static final int gd_export=0x7f080005;
+        public static final int gd_eye=0x7f080017;
+        public static final int gd_gallery=0x7f08001a;
         public static final int gd_go_home=0x7f080000;
-        public static final int gd_group=0x7f080018;
-        public static final int gd_help=0x7f080011;
-        public static final int gd_info=0x7f080012;
-        public static final int gd_list=0x7f080014;
-        public static final int gd_locate=0x7f080009;
-        public static final int gd_locate_myself=0x7f08000f;
-        public static final int gd_mail=0x7f08001b;
-        public static final int gd_pick_photo=0x7f080008;
-        public static final int gd_refresh=0x7f080006;
-        public static final int gd_search=0x7f080001;
-        public static final int gd_settings=0x7f080013;
-        public static final int gd_share=0x7f080005;
-        public static final int gd_slideshow=0x7f08001a;
-        public static final int gd_sort_alpha=0x7f08000e;
-        public static final int gd_sort_by_size=0x7f08000d;
-        public static final int gd_star=0x7f08000c;
-        public static final int gd_take_photo=0x7f080007;
-        public static final int gd_talk=0x7f080002;
-        public static final int gd_trashcan=0x7f080015;
-        public static final int maps_key=0x7f08001e;
-        public static final int maps_key_debug=0x7f08001f;
-        public static final int password_passage=0x7f08001d;
+        public static final int gd_group=0x7f080019;
+        public static final int gd_help=0x7f080012;
+        public static final int gd_info=0x7f080013;
+        public static final int gd_list=0x7f080015;
+        public static final int gd_locate=0x7f08000a;
+        public static final int gd_locate_myself=0x7f080010;
+        public static final int gd_mail=0x7f08001c;
+        public static final int gd_map=0x7f080001;
+        public static final int gd_pick_photo=0x7f080009;
+        public static final int gd_refresh=0x7f080007;
+        public static final int gd_search=0x7f080002;
+        public static final int gd_settings=0x7f080014;
+        public static final int gd_share=0x7f080006;
+        public static final int gd_slideshow=0x7f08001b;
+        public static final int gd_sort_alpha=0x7f08000f;
+        public static final int gd_sort_by_size=0x7f08000e;
+        public static final int gd_star=0x7f08000d;
+        public static final int gd_take_photo=0x7f080008;
+        public static final int gd_talk=0x7f080003;
+        public static final int gd_trashcan=0x7f080016;
+        public static final int maps_key=0x7f08001f;
+        public static final int maps_key_debug=0x7f080020;
+        public static final int password_passage=0x7f08001e;
     }
     public static final class style {
         public static final int EditEntryDescription=0x7f09003e;
