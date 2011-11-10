@@ -32,9 +32,9 @@ public class EditEntryTextFragment extends Fragment implements LoaderManager.Loa
     private TextView mDate;
 
     public static EditEntryTextFragment newInstance(String title, String text, String date){
-		EditEntryTextFragment f = new EditEntryTextFragment();
+        EditEntryTextFragment f = new EditEntryTextFragment();
 
-		// Supply title & text input as an argument.
+        // Supply title & text input as an argument.
         Bundle args = new Bundle();
         if(title != null) {
             args.putString(Database.Field.TITLE, title);
@@ -50,8 +50,8 @@ public class EditEntryTextFragment extends Fragment implements LoaderManager.Loa
 
         f.setArguments(args);
 
-		return f;
-	}
+        return f;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +111,24 @@ public class EditEntryTextFragment extends Fragment implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public boolean hasChangedData() {
+        Bundle args = getArguments();
+
+        if(args.containsKey(Database.Field.TITLE)) {
+            if(!args.getString(Database.Field.TITLE).equals(mTitle.getText().toString())) {
+                return true;
+            }
+        }
+
+        if(args.containsKey(Database.Field.TEXT)) {
+            if(!args.getString(Database.Field.TEXT).equals(mText.getText().toString())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public String getTitle() {

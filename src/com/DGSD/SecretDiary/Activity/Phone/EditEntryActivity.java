@@ -1,5 +1,13 @@
+/**
+ * TODO: Add animation to view adding on tag page:
+ *  this.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
+ *  (http://android-er.blogspot.com/2009/10/listview-and-listactivity-layout.html)
+ */
+
 package com.DGSD.SecretDiary.Activity.Phone;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +16,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 import com.DGSD.SecretDiary.Activity.BaseActivity;
 import com.DGSD.SecretDiary.Data.Database;
@@ -28,15 +38,21 @@ import greendroid.widget.ActionBarItem;
  * Date: 6/11/11
  * Description:
  */
-public class EditEntryActivity extends BaseActivity {
+public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
     private static final String TAG = EditEntryActivity.class.getSimpleName();
 
     private ActionBar mActionBar;
 
-    private static final int ADD_ENTRY = 0;
-
     private static final int NUM_PAGES = 4;
 
+    //Constants for action bar items
+    private static final int ADD_ENTRY = 0;
+
+    private static final int SET_CURRENT_LOCATION = 1;
+
+    private static final int OPEN_IN_MAPS = 2;
+
+    //Constants for individual pages
     private static final int TEXT_DETAILS = 0;
 
     private static final int TAG_DETAILS = 1;
@@ -53,6 +69,8 @@ public class EditEntryActivity extends BaseActivity {
 
     private FragmentAdapter mAdapter;
 
+    private ActionBarItem mSetCurrentLocationItem;
+
     //We can only have 1 mapview per activity, so we need to keep it here
     public MapView mMapView;
 
@@ -63,7 +81,7 @@ public class EditEntryActivity extends BaseActivity {
         setActionBarContentView(R.layout.edit_entry);
 
         mActionBar = getGdActionBar();
-        mActionBar.setTitle("Secret Diary Entry");
+        mActionBar.setTitle("New Entry");
         mActionBar.setType(ActionBar.Type.Normal);
         mActionBar.addItem(ActionBarItem.Type.Add, ADD_ENTRY);
 
@@ -72,7 +90,7 @@ public class EditEntryActivity extends BaseActivity {
             mEntryId = (Integer) b.get(Database.Field.ID);
         }
 
-	    setMapView( new MapView(this, getResources().getString(R.string.maps_key_debug)) );
+        setMapView( new MapView(this, getResources().getString(R.string.maps_key_debug)) );
 
         mIsUpdate = b.getBoolean(Utils.EXTRA.UPDATE, false);
 
@@ -81,8 +99,11 @@ public class EditEntryActivity extends BaseActivity {
         mPager.setAdapter(mAdapter);
 
         TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
-		indicator.setViewPager(mPager);
-		indicator.setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.Underline);
+        indicator.setViewPager(mPager);
+        indicator.setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.Underline);
+
+        //Register listener to make changes when pages are scrolled
+        indicator.setOnPageChangeListener(this);
     }
 
     public class FragmentAdapter extends FragmentPagerAdapter  implements TitleProvider {
@@ -120,23 +141,23 @@ public class EditEntryActivity extends BaseActivity {
             switch(position) {
                 case TEXT_DETAILS:
                     f = EditEntryTextFragment.newInstance(i.getStringExtra(Database.Field.TITLE),
-                             i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
+                            i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
                     break;
                 case TAG_DETAILS:
                     f = EditEntryTagFragment.newInstance(i.getStringExtra(Database.Field.TAGS));
                     break;
                 case MEDIA_DETAILS:
                     f = EditEntryTextFragment.newInstance(i.getStringExtra(Database.Field.TITLE),
-                             i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
+                            i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
                     break;
                 case LOCATION_DETAILS:
                     Double lat = null, lon = null;
 
                     try {
-                       lat = Double.valueOf(i.getStringExtra(Database.Field.LAT));
-                       lon = Double.valueOf(i.getStringExtra(Database.Field.LONG));
+                        lat = Double.valueOf(i.getStringExtra(Database.Field.LAT));
+                        lon = Double.valueOf(i.getStringExtra(Database.Field.LONG));
                     } catch(Exception e) {
-                       //o well..
+                        //o well..
                     }
                     if(lat == null || lon == null) {
                         f = EditEntryLocationFragment.newInstance(null, null);
@@ -152,13 +173,13 @@ public class EditEntryActivity extends BaseActivity {
 
     @Override
     public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+        //Using instantiateItem as a hack to get already instantiated fragment
+        final EditEntryTextFragment textFragment = (EditEntryTextFragment) mAdapter.instantiateItem(mPager, TEXT_DETAILS);
+        final EditEntryTagFragment tagFragment = (EditEntryTagFragment) mAdapter.instantiateItem(mPager, TAG_DETAILS);
+        final EditEntryLocationFragment locationFragment = (EditEntryLocationFragment) mAdapter.instantiateItem(mPager, LOCATION_DETAILS);
+
         switch(item.getItemId()) {
             case ADD_ENTRY:
-                //Using instantiateItem as a hack to get already instantiated fragment
-                final EditEntryTextFragment textFragment = (EditEntryTextFragment) mAdapter.instantiateItem(mPager, TEXT_DETAILS);
-                final EditEntryTagFragment tagFragment = (EditEntryTagFragment) mAdapter.instantiateItem(mPager, TAG_DETAILS);
-                final EditEntryLocationFragment locationFragment = (EditEntryLocationFragment) mAdapter.instantiateItem(mPager, LOCATION_DETAILS);
-
                 Database.ArgumentBuilder builder = new Database.ArgumentBuilder();
 
                 builder.add(Database.Field.TITLE, textFragment.getTitle());
@@ -197,6 +218,15 @@ public class EditEntryActivity extends BaseActivity {
                     Toast.makeText(this, "Error saving entry. Please try again", Toast.LENGTH_SHORT).show();
                 }
                 break;
+
+            case SET_CURRENT_LOCATION:
+                locationFragment.setToCurrentLocation();
+                break;
+
+            case OPEN_IN_MAPS:
+                locationFragment.openCurrentLocationInMaps();
+                break;
+
             default:
                 return super.onHandleActionBarItemClick(item, position);
         }
@@ -204,11 +234,102 @@ public class EditEntryActivity extends BaseActivity {
     }
 
     @Override
-	public void onDestroy() {
-		mMapView = null;
+    public void onDestroy() {
+        mMapView = null;
 
-		super.onDestroy();
-	}
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            final EditEntryTextFragment textFragment = (EditEntryTextFragment) mAdapter.instantiateItem(mPager, TEXT_DETAILS);
+            final EditEntryTagFragment tagFragment = (EditEntryTagFragment) mAdapter.instantiateItem(mPager, TAG_DETAILS);
+            final EditEntryLocationFragment locationFragment = (EditEntryLocationFragment) mAdapter.instantiateItem(mPager, LOCATION_DETAILS);
+
+            if(!textFragment.hasChangedData() &&
+                    !tagFragment.hasChangedData()
+                    && !locationFragment.hasChangedData()) {
+                return super.onKeyDown(keyCode, event);
+            }
+
+
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(EditEntryActivity.this);
+
+            builder.setTitle("Are you sure?");
+            builder.setMessage("Your changes will be lost");
+
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.create().show();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+        //Do nothing.
+    }
+
+    @Override
+    public void onPageSelected(int page) {
+        //Adjust the action bar items.
+
+        //Remove existing actionbar items
+        mActionBar.removeAllItems();
+
+        switch(page) {
+            case TEXT_DETAILS:
+
+                break;
+
+            case TAG_DETAILS:
+
+                break;
+
+            case MEDIA_DETAILS:
+
+                break;
+
+            case LOCATION_DETAILS:
+                //Current location
+                mActionBar.addItem(ActionBarItem.Type.LocateMyself, SET_CURRENT_LOCATION);
+
+                //Open in maps item
+                mActionBar.addItem(ActionBarItem.Type.Map, OPEN_IN_MAPS);
+
+                break;
+        }
+
+        //Add/save item
+        mActionBar.addItem(ActionBarItem.Type.Add, ADD_ENTRY);
+
+        //Make sure we hide the map zoom controller for our mapview
+        if(mMapView != null)
+        if(page == LOCATION_DETAILS) {
+            mMapView.getZoomButtonsController().getContainer().setVisibility(View.VISIBLE);
+        } else {
+            mMapView.getZoomButtonsController().getContainer().setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+        //Do Nothing
+    }
 
     public MapView getMapView() {
         return mMapView;
@@ -219,10 +340,10 @@ public class EditEntryActivity extends BaseActivity {
             Log.e(TAG, "Attemping to set a second map view. Ignoring");
             return;
         }
-		mMapView = m;
-		mMapView.setClickable(true);
-		mMapView.setBuiltInZoomControls(true);
-		mMapView.getController().setZoom(12);
-	}
+        mMapView = m;
+        mMapView.setClickable(true);
+        mMapView.setBuiltInZoomControls(true);
+        mMapView.getController().setZoom(12);
+    }
 
 }

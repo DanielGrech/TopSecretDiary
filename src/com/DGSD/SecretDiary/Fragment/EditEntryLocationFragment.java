@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.DGSD.SecretDiary.Activity.Phone.EditEntryActivity;
@@ -47,6 +46,8 @@ public class EditEntryLocationFragment extends Fragment implements DrawableOverl
 
     protected Double mLon;
 
+    protected boolean _hasChanged = false;
+
     public static EditEntryLocationFragment newInstance(Double lat, Double lon){
         EditEntryLocationFragment f = new EditEntryLocationFragment();
 
@@ -76,39 +77,6 @@ public class EditEntryLocationFragment extends Fragment implements DrawableOverl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         mContainer = (FrameLayout) inflater.inflate(R.layout.edit_entry_location, container, false);
-
-        Button openMaps = (Button) mContainer.findViewById(R.id.btn_openInMaps);
-        Button setCurrent = (Button) mContainer.findViewById(R.id.btn_SetCurrentLocation);
-
-
-        openMaps.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if(mLat != null && mLon != null) {
-                    try {
-                        String location_uri = "geo:" + mLat + "," + mLon + "?z=18&q=" + mLat + "," + mLon;
-                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(location_uri));
-                        startActivity(intent);
-                    } catch(Throwable e) {
-                        Toast.makeText(mActivity, "Error opening Google Maps", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(mActivity, "Location could not be found", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        setCurrent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GeoPoint p = getCurrentLocation();
-                if(p == null) {
-                    Toast.makeText(mActivity, "Unable to find current location", Toast.LENGTH_SHORT).show();
-                } else {
-                    EditEntryLocationFragment.this.onTapped(p);
-                }
-            }
-        });
 
         return mContainer;
     }
@@ -195,6 +163,31 @@ public class EditEntryLocationFragment extends Fragment implements DrawableOverl
         //Update our lat/long values
         mLat = p.getLatitudeE6() / 1E6;
         mLon = p.getLongitudeE6() / 1E6;
+
+        _hasChanged = true;
+    }
+
+    public void setToCurrentLocation() {
+        GeoPoint p = getCurrentLocation();
+        if(p == null) {
+            Toast.makeText(mActivity, "Unable to find current location", Toast.LENGTH_SHORT).show();
+        } else {
+            this.onTapped(p);
+        }
+    }
+
+    public void openCurrentLocationInMaps() {
+        if(mLat != null && mLon != null) {
+            try {
+                String location_uri = "geo:" + mLat + "," + mLon + "?z=18&q=" + mLat + "," + mLon;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(location_uri));
+                startActivity(intent);
+            } catch(Throwable e) {
+                Toast.makeText(mActivity, "Error opening Google Maps", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(mActivity, "Location could not be found", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public Double getLatitude() {
@@ -221,6 +214,10 @@ public class EditEntryLocationFragment extends Fragment implements DrawableOverl
         }
     }
 
+    public boolean hasChangedData() {
+        return _hasChanged;
+    }
+
     private class MyLocationListener implements LocationListener {
         public void onLocationChanged(Location loc) {
             // TODO Auto-generated method stub
@@ -243,9 +240,5 @@ public class EditEntryLocationFragment extends Fragment implements DrawableOverl
         public void onStatusChanged(String provider,int status, Bundle extras) {
 
         }
-    }
-
-    protected boolean isRouteDisplayed() {
-        return false;
     }
 }

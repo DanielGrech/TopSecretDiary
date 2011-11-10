@@ -241,6 +241,31 @@ public class EditEntryTagFragment extends DialogFragment
         return Utils.join(tags, ",");
     }
 
+    public boolean hasChangedData() {
+        Bundle args = getArguments();
+
+        String[] orig_tags = getArguments().getStringArray(Database.Field.TAGS);
+
+        if(orig_tags == null) {
+            //We have no data in the first place
+            return tags.size() > 0 ? true : false;
+        }
+
+        if(tags.size() != orig_tags.length) {
+            //We have definitely changed some tag selection
+            return true;
+        } else {
+            //Check that very tag in orig_tags is in tags
+            for(String t :orig_tags) {
+                if(!tags.contains(t)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     private class TagAdapter extends SimpleCursorAdapter {
         private int name_column = -1;
 
