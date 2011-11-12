@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Android Compatability Library_maps">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/android-sdk/extras/android/support/v4/android-support-v4-r4-googlemaps.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../GreenDroid/GreenDroid/GreenDroid.iml" filepath="$PROJECT_DIR$/../GreenDroid/GreenDroid/GreenDroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../GreenDroid/GreenDroid-GoogleAPIs/GreenDroid-GoogleAPIs.iml" filepath="$PROJECT_DIR$/../GreenDroid/GreenDroid-GoogleAPIs/GreenDroid-GoogleAPIs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TopSecretDiary.iml" filepath="$PROJECT_DIR$/TopSecretDiary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Android-ViewPagerIndicator/library/library.iml" filepath="$PROJECT_DIR$/../Android-ViewPagerIndicator/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Android-ViewPagerIndicator/parent.iml" filepath="$PROJECT_DIR$/../Android-ViewPagerIndicator/parent.iml" />
+    </modules>
+  </component>
+</project>
+

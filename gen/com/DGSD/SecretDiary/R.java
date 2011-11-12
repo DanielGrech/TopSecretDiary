@@ -1140,6 +1140,7 @@ containing a value of this type.
         public static final int gd_trashcan=0x7f080016;
         public static final int maps_key=0x7f08001f;
         public static final int maps_key_debug=0x7f080020;
+        public static final int maps_key_debug_imac=0x7f080021;
         public static final int password_passage=0x7f08001e;
     }
     public static final class style {
