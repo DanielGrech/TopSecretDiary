@@ -1,16 +1,13 @@
-/**
- * TODO: Add animation to view adding on tag page:
- *  this.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
- *  (http://android-er.blogspot.com/2009/10/listview-and-listactivity-layout.html)
- */
-
 package com.DGSD.SecretDiary.Activity.Phone;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Camera;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,27 +15,36 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.provider.MediaStore.Images.Media;
 import android.widget.Toast;
 import com.DGSD.SecretDiary.Activity.BaseActivity;
 import com.DGSD.SecretDiary.Data.Database;
 import com.DGSD.SecretDiary.Data.EntryProvider;
 import com.DGSD.SecretDiary.Fragment.EditEntryLocationFragment;
+import com.DGSD.SecretDiary.Fragment.EditEntryMediaFragment;
 import com.DGSD.SecretDiary.Fragment.EditEntryTagFragment;
 import com.DGSD.SecretDiary.Fragment.EditEntryTextFragment;
 import com.DGSD.SecretDiary.R;
+import com.DGSD.SecretDiary.UI.CustomQuickAction;
 import com.DGSD.SecretDiary.Utils;
 import com.google.android.maps.MapView;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
 import greendroid.widget.ActionBar;
 import greendroid.widget.ActionBarItem;
+import greendroid.widget.QuickActionGrid;
+import greendroid.widget.QuickActionWidget;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Created By: Daniel Grech
  * Date: 6/11/11
  * Description:
  */
-public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageChangeListener, QuickActionWidget.OnQuickActionClickListener {
     private static final String TAG = EditEntryActivity.class.getSimpleName();
 
     private ActionBar mActionBar;
@@ -54,6 +60,8 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
 
     private static final int SHARE_TEXT = 3;
 
+    private static final int ADD_MEDIA = 4;
+
     //Constants for individual pages
     private static final int TEXT_DETAILS = 0;
 
@@ -63,6 +71,11 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
 
     private static final int LOCATION_DETAILS = 3;
 
+    //Activity Result Constants
+    private static final int GET_CAMERA_IMAGE = 0;
+
+    private static final int GET_GALLERY_IMAGE = 1;
+
     private boolean mIsUpdate;
 
     private Integer mEntryId = null;
@@ -71,7 +84,7 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
 
     private FragmentAdapter mAdapter;
 
-    private ActionBarItem mSetCurrentLocationItem;
+    private QuickActionWidget mPhotoActionContainer;
 
     //We can only have 1 mapview per activity, so we need to keep it here
     public MapView mMapView;
@@ -83,7 +96,7 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
         setActionBarContentView(R.layout.edit_entry);
 
         mActionBar = getGdActionBar();
-        mActionBar.setTitle("New Entry");
+        mActionBar.setTitle("Diary Entry");
         mActionBar.setType(ActionBar.Type.Normal);
         mActionBar.addItem(ActionBarItem.Type.Share, SHARE_TEXT);
         mActionBar.addItem(ActionBarItem.Type.Save, ADD_ENTRY);
@@ -107,6 +120,13 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
 
         //Register listener to make changes when pages are scrolled
         indicator.setOnPageChangeListener(this);
+
+        //Set up any quick actions
+        mPhotoActionContainer = new QuickActionGrid(this);
+        mPhotoActionContainer.setOnQuickActionClickListener(this);
+        mPhotoActionContainer.addQuickAction(new CustomQuickAction(this, R.drawable.gd_action_bar_take_photo, "Camera"));
+        mPhotoActionContainer.addQuickAction(new CustomQuickAction(this, R.drawable.gd_action_bar_gallery, "Gallery"));
+        mPhotoActionContainer.addQuickAction(new CustomQuickAction(this, android.R.drawable.ic_btn_speak_now, "Recording"));
     }
 
     public class FragmentAdapter extends FragmentPagerAdapter  implements TitleProvider {
@@ -150,8 +170,8 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
                     f = EditEntryTagFragment.newInstance(i.getStringExtra(Database.Field.TAGS));
                     break;
                 case MEDIA_DETAILS:
-                    f = EditEntryTextFragment.newInstance(i.getStringExtra(Database.Field.TITLE),
-                            i.getStringExtra(Database.Field.TEXT), i.getStringExtra(Database.Field.DATE));
+                    f = EditEntryMediaFragment.newInstance(i.getStringExtra(Database.Field.IMG_URIS),
+                            i.getStringExtra(Database.Field.RECORDINGS));
                     break;
                 case LOCATION_DETAILS:
                     Double lat = null, lon = null;
@@ -179,6 +199,7 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
         //Using instantiateItem as a hack to get already instantiated fragment
         final EditEntryTextFragment textFragment = (EditEntryTextFragment) mAdapter.instantiateItem(mPager, TEXT_DETAILS);
         final EditEntryTagFragment tagFragment = (EditEntryTagFragment) mAdapter.instantiateItem(mPager, TAG_DETAILS);
+        final EditEntryMediaFragment mediaFragment = (EditEntryMediaFragment) mAdapter.instantiateItem(mPager, MEDIA_DETAILS);
         final EditEntryLocationFragment locationFragment = (EditEntryLocationFragment) mAdapter.instantiateItem(mPager, LOCATION_DETAILS);
 
         switch(item.getItemId()) {
@@ -188,8 +209,8 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
                 builder.add(Database.Field.TITLE, textFragment.getTitle());
                 builder.add(Database.Field.TEXT, textFragment.getText());
                 builder.add(Database.Field.DATE, textFragment.getDate());
-                builder.add(Database.Field.IMG_URIS,"");
-                builder.add(Database.Field.RECORDINGS,"");
+                builder.add(Database.Field.IMG_URIS,mediaFragment.getImageUris());
+                builder.add(Database.Field.RECORDINGS,mediaFragment.getRecordingUris());
                 builder.add(Database.Field.TAGS, tagFragment.getTags());
                 builder.add(Database.Field.FILES,"");
                 builder.add(Database.Field.LAT, locationFragment.getLatitude() == null ? "" : String.valueOf(locationFragment.getLatitude()));
@@ -248,6 +269,10 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
                 startActivity(Intent.createChooser(sharingIntent, "Share entry"));
                 break;
 
+            case ADD_MEDIA:
+                mPhotoActionContainer.show(item.getItemView());
+                break;
+
             default:
                 return super.onHandleActionBarItemClick(item, position);
         }
@@ -255,9 +280,27 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
     }
 
     @Override
+    public void onQuickActionClicked(QuickActionWidget widget, int pos) {
+        if(widget.equals(mPhotoActionContainer)) {
+            switch(pos) {
+                case 0: //Open Camera
+                    getCameraPhoto();
+                    break;
+
+                case 1: //Open Gallery
+                    getGalleryPhoto();
+                    break;
+
+                case 2: //Open Recording
+
+                    break;
+            }
+        }
+    }
+
+    @Override
     public void onDestroy() {
         mMapView = null;
-
         super.onDestroy();
     }
 
@@ -323,14 +366,12 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
                 break;
 
             case MEDIA_DETAILS:
+                mActionBar.addItem(ActionBarItem.Type.Add, ADD_MEDIA);
 
                 break;
 
             case LOCATION_DETAILS:
-                //Current location
                 mActionBar.addItem(ActionBarItem.Type.LocateMyself, SET_CURRENT_LOCATION);
-
-                //Open in maps item
                 mActionBar.addItem(ActionBarItem.Type.Map, OPEN_IN_MAPS);
 
                 break;
@@ -351,6 +392,99 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrollStateChanged(int i) {
         //Do Nothing
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        switch(requestCode) {
+            case GET_CAMERA_IMAGE:
+                if (resultCode == Activity.RESULT_OK) {
+                    /*try {
+                     final File file = Utils.getTempFile(this);
+
+                     String uri = Media.insertImage(getContentResolver(),
+                             file.getAbsolutePath(), null, null);
+
+                     System.err.println("MY URI IS: " + uri);
+
+                     if(mUris.contains(uri)) {
+                         Toast.makeText(this, "Image already added",
+                                 Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+
+                     mUris.add( uri );
+
+                     mImageTitle.setVisibility(View.VISIBLE);
+
+                     mImageGallery.setVisibility(View.VISIBLE);
+
+                     if(mImageAdapter != null) {
+                         mImageAdapter.notifyDataSetChanged();
+                     } else {
+                         mImageAdapter = new GalleryAdapter(this, GalleryAdapter.IMAGE_ONLY);
+                         mImageGallery.setAdapter(mImageAdapter);
+                     }
+
+                     file.delete();
+
+                 } catch (FileNotFoundException e) {
+                     Log.e(TAG, "Error opening gallery image", e);
+                 } catch (SecurityException e) {
+                     Log.e(TAG, "Error opening gallery image", e);
+                 }   */
+                } else {
+                    Log.d(TAG, "No picture was taken");
+                }
+                break;
+            case GET_GALLERY_IMAGE:
+                if (resultCode == Activity.RESULT_OK) {
+                    /*String uri = intent.getDataString();
+
+                   if(mUris.contains(uri)) {
+                       Toast.makeText(this, "Image already added",
+                               Toast.LENGTH_SHORT).show();
+                       return;
+                   }
+
+                   mUris.add(uri);
+
+                   mImageTitle.setVisibility(View.VISIBLE);
+
+                   mImageGallery.setVisibility(View.VISIBLE);
+
+                   if(mImageAdapter != null) {
+                       System.err.println("NOTIFYING ADAPTER!");
+                       mImageAdapter.notifyDataSetChanged();
+                   } else {
+                       mImageAdapter = new GalleryAdapter(this, GalleryAdapter.IMAGE_ONLY);
+                       mImageGallery.setAdapter(mImageAdapter);
+                   } */
+                } else {
+                    Log.d(TAG, "No Image was chosen");
+                }
+                break;
+        }
+    }
+
+    private void getCameraPhoto(){
+        try {
+            final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(Utils.getTempFile(this)) );
+
+            startActivityForResult(intent, GET_CAMERA_IMAGE);
+        } catch(Exception e) {
+            Log.e(TAG, "Error opening camera", e);
+            Toast.makeText(this, "Error opening camera", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void getGalleryPhoto() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),
+                GET_GALLERY_IMAGE);
     }
 
     public MapView getMapView() {
