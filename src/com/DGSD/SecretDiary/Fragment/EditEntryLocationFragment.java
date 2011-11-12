@@ -91,7 +91,11 @@ public class EditEntryLocationFragment extends Fragment implements DrawableOverl
 
         final MapView map = mActivity.getMapView();
         if(mContainer != null) {
-            mContainer.addView(map,0);
+            if(map.getParent() == null) {
+                mContainer.addView(map,0);
+            } else {
+                Log.e(TAG, "Map view already had a parent");
+            }
         }
 
         mDrawable = mActivity.getResources().getDrawable(R.drawable.map_marker);

@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="278a6f15-f45f-4dec-a9bb-309fc7fb23d4" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../GreenDroid/GreenDroid-GoogleAPIs/GreenDroid-GoogleAPIs.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/androidDexCompiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Android_Compatability_Library_maps.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__android_android_1_6_r3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__android_support_compatibility_v4_r3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_directionalviewpager_library_1_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TopSecretDiary.iml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Android-ViewPagerIndicator/pom.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Android-ViewPagerIndicator/sample/AndroidManifest.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Android-ViewPagerIndicator/sample/libs/android-directionalviewpager-1.2.0.jar" afterPath="" />
@@ -77,12 +70,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBar.java" afterPath="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBar.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBarItem.java" afterPath="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBarItem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/PagedView.java" afterPath="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/PagedView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/DGSD/SecretDiary/R.java" afterPath="$PROJECT_DIR$/gen/com/DGSD/SecretDiary/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/cyrilmottier/android/greendroid/R.java" afterPath="$PROJECT_DIR$/gen/com/cyrilmottier/android/greendroid/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/viewpagerindicator/R.java" afterPath="$PROJECT_DIR$/gen/com/viewpagerindicator/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/edit_entry_tag.xml" afterPath="$PROJECT_DIR$/res/layout/edit_entry_tag.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/EditEntryActivity.java" afterPath="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/EditEntryActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/FirstLoginActivity.java" afterPath="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/FirstLoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryLocationFragment.java" afterPath="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryLocationFragment.java" />
     </list>
     <ignored path="TopSecretDiary.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -141,50 +135,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ChoiceActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/ChoiceActivity.java">
+      <file leaf-file-name="EditEntryTagFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryTagFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="39" selection-start="711" selection-end="738" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FirstLoginActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/FirstLoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="91" selection-start="4376" selection-end="4377" vertical-scroll-proportion="-79.61539">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="23" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="121" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="73" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
+            <state line="42" column="0" selection-start="1311" selection-end="1311" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -193,16 +147,16 @@
       <file leaf-file-name="EditEntryActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/EditEntryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="91" selection-start="2996" selection-end="2996" vertical-scroll-proportion="0.6260032">
+            <state line="245" column="84" selection-start="9693" selection-end="9693" vertical-scroll-proportion="0.49748743">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/BaseActivity.java">
+      <file leaf-file-name="EditEntryLocationFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryLocationFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="122" selection-start="2812" selection-end="2812" vertical-scroll-proportion="0.0">
+            <state line="96" column="57" selection-start="3063" selection-end="3063" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -224,6 +178,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/FirstLoginActivity.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/../GreenDroid/GreenDroid/res/values/gd_strings.xml" />
+        <option value="$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBarItem.java" />
+        <option value="$PROJECT_DIR$/res/layout/edit_entry_tag.xml" />
+        <option value="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryLocationFragment.java" />
         <option value="$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/EditEntryActivity.java" />
       </list>
     </option>
@@ -238,6 +196,22 @@
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
     <option name="LAST_EDITED_TAB_NAME" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Error handling</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -321,6 +295,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Fragment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TopSecretDiary" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TopSecretDiary" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SecretDiary" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Activity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -364,24 +360,6 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TopSecretDiary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TopSecretDiary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -394,7 +372,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="recentsLimit" value="5" />
     <property name="project.structure.side.proportion" value="0.36458334" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -607,7 +585,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959914" sideWeight="0.6700925" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3299075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3299075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299075" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -662,31 +640,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Encryption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Data/BaseProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="38" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.27012712" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="13" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBarItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="75" selection-start="1109" selection-end="1109" vertical-scroll-proportion="-4.550562" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryLocationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="979" selection-end="979" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/SecretDiaryApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="65" selection-start="211" selection-end="211" vertical-scroll-proportion="0.0">
@@ -701,35 +654,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/ChoiceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="39" selection-start="711" selection-end="738" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/FirstLoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="91" selection-start="4376" selection-end="4377" vertical-scroll-proportion="-79.61539">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/themes.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="35" selection-start="639" selection-end="639" vertical-scroll-proportion="0.3130016">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="23" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -742,28 +670,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="122" selection-start="2812" selection-end="2812" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="121" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.0">
+        <state line="81" column="122" selection-start="2812" selection-end="2812" vertical-scroll-proportion="1.565008">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="73" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
+        <state line="8" column="73" selection-start="447" selection-end="447" vertical-scroll-proportion="0.19261637">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="121" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.6388443">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="23" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.7656501">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/FirstLoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="138" column="91" selection-start="4376" selection-end="4377" vertical-scroll-proportion="3.4673367">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/ChoiceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="39" selection-start="711" selection-end="738" vertical-scroll-proportion="0.49438202">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../GreenDroid/GreenDroid/res/values/gd_strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="76" selection-start="812" selection-end="812" vertical-scroll-proportion="0.15730338">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../GreenDroid/GreenDroid/src/greendroid/widget/ActionBarItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="331" column="86" selection-start="7700" selection-end="7700" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/edit_entry_tag.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="40" selection-start="929" selection-end="929" vertical-scroll-proportion="0.47030497">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryTagFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="0" selection-start="1311" selection-end="1311" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Fragment/EditEntryLocationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="57" selection-start="3063" selection-end="3063" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/DGSD/SecretDiary/Activity/Phone/EditEntryActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="91" selection-start="2996" selection-end="2996" vertical-scroll-proportion="0.6260032">
+        <state line="245" column="84" selection-start="9693" selection-end="9693" vertical-scroll-proportion="0.49748743">
           <folding />
         </state>
       </provider>

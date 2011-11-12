@@ -52,6 +52,8 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
 
     private static final int OPEN_IN_MAPS = 2;
 
+    private static final int SHARE_TEXT = 3;
+
     //Constants for individual pages
     private static final int TEXT_DETAILS = 0;
 
@@ -83,7 +85,8 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
         mActionBar = getGdActionBar();
         mActionBar.setTitle("New Entry");
         mActionBar.setType(ActionBar.Type.Normal);
-        mActionBar.addItem(ActionBarItem.Type.Add, ADD_ENTRY);
+        mActionBar.addItem(ActionBarItem.Type.Share, SHARE_TEXT);
+        mActionBar.addItem(ActionBarItem.Type.Save, ADD_ENTRY);
 
         Bundle b = getIntent().getExtras();
         if(b.containsKey(Database.Field.ID)) {
@@ -227,6 +230,24 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
                 locationFragment.openCurrentLocationInMaps();
                 break;
 
+            case SHARE_TEXT:
+                String title = textFragment.getTitle();
+                String text = textFragment.getText();
+
+                if((title == null || title.length() == 0) &&
+                        (text == null || text.length() == 0)) {
+                    Toast.makeText(this, "Nothing to share",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+                startActivity(Intent.createChooser(sharingIntent, "Share entry"));
+                break;
+
             default:
                 return super.onHandleActionBarItemClick(item, position);
         }
@@ -293,6 +314,7 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
 
         switch(page) {
             case TEXT_DETAILS:
+                mActionBar.addItem(ActionBarItem.Type.Share, SHARE_TEXT);
 
                 break;
 
@@ -315,15 +337,15 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
         }
 
         //Add/save item
-        mActionBar.addItem(ActionBarItem.Type.Add, ADD_ENTRY);
+        mActionBar.addItem(ActionBarItem.Type.Save, ADD_ENTRY);
 
         //Make sure we hide the map zoom controller for our mapview
         if(mMapView != null)
-        if(page == LOCATION_DETAILS) {
-            mMapView.getZoomButtonsController().getContainer().setVisibility(View.VISIBLE);
-        } else {
-            mMapView.getZoomButtonsController().getContainer().setVisibility(View.INVISIBLE);
-        }
+            if(page == LOCATION_DETAILS) {
+                mMapView.getZoomButtonsController().getContainer().setVisibility(View.VISIBLE);
+            } else {
+                mMapView.getZoomButtonsController().getContainer().setVisibility(View.INVISIBLE);
+            }
     }
 
     @Override
