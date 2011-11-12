@@ -4,4 +4,6 @@
     <string name="password_passage">The quick brown fox jumps over the lazy dog</string>
     <string name="maps_key">0jZhYLWjLGQkHaP0icBfKvafsLkJuoRIKqCvwRg</string>
 	<string name="maps_key_debug">0jZhYLWjLGQnr3yTbRIW8MD2dCG8klfpdO6sC3Q</string>
+    <string name="maps_key_debug_imac">0jZhYLWjLGQkrkaOa_Wsw-zQh7QOtYxW40CI_1g</string>
+
 </resources>

@@ -90,7 +90,7 @@ public class EditEntryActivity extends BaseActivity implements ViewPager.OnPageC
             mEntryId = (Integer) b.get(Database.Field.ID);
         }
 
-        setMapView( new MapView(this, getResources().getString(R.string.maps_key_debug)) );
+        setMapView( new MapView(this, getResources().getString(R.string.maps_key_debug_imac)) );
 
         mIsUpdate = b.getBoolean(Utils.EXTRA.UPDATE, false);
 
