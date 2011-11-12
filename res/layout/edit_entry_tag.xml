@@ -8,73 +8,32 @@
       android:background="@color/panel">
 
       <LinearLayout
-          android:id="@+id/new_tag_container"
+          android:id="@+id/new_tag_entry_container"
+          android:layout_height="55dp"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:padding="6px"
-          android:background="@color/new_tag_section">
+          android:background="@color/new_tag_section"
+          android:padding="5px"
+          android:orientation="horizontal">
 
-          <TextView
-               android:id="@+id/label_NewTagTitle"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:textAppearance="@style/EditEntryTitle"
-               android:text="New Tag" />
+          <EditText
+               android:id="@+id/new_tag_name"
+               android:layout_width="0dp"
+               android:layout_height="fill_parent"
+               android:layout_gravity="center"
+               android:layout_weight="3"
+               android:imeOptions="actionGo"
+               android:hint="Add new tag"
+               android:gravity="top|left"/>
 
-          <TextView
-               android:id="@+id/label_desc_NewTagTitle"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:textAppearance="@style/EditEntryDescription"
-               android:text="Enter the name and color to make a new tag" />
-
-          <LinearLayout
-              android:id="@+id/new_tag_entry_container"
-              android:layout_height="55dp"
-              android:layout_width="match_parent"
-              android:padding="5px"
-              android:orientation="horizontal">
-
-              <EditText
-                   android:id="@+id/new_tag_name"
-                   android:layout_width="0dp"
-                   android:layout_height="fill_parent"
-                   android:layout_gravity="center"
-                   android:layout_weight="3"
-                   android:imeOptions="actionGo"
-                   android:gravity="top|left"/>
-
-              <ImageButton
-                  android:id="@+id/btn_AddNewTag"
-                  android:layout_width="0dp"
-                  android:layout_height="fill_parent"
-                  android:layout_gravity="center"
-                  android:layout_weight="1"
-                  android:src="@drawable/ic_menu_forward" />
-
-          </LinearLayout>
-
+          <ImageButton
+              android:id="@+id/btn_AddNewTag"
+              android:layout_width="0dp"
+              android:layout_height="fill_parent"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+              android:src="@drawable/gd_action_bar_add" />
 
       </LinearLayout>
-
-      <TextView
-           android:id="@+id/label_ExistingTagsTitle"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:textAppearance="@style/EditEntryTitle"
-           android:paddingLeft="6px"
-           android:paddingRight="6px"
-           android:text="Existing tags" />
-
-      <TextView
-           android:id="@+id/label_desc_ExistingTagsTitle"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:paddingLeft="6px"
-           android:paddingRight="6px"
-           android:textAppearance="@style/EditEntryDescription"
-           android:text="Select which tags you would like to apply to this entry" />
 
       <ListView
           android:id="@+id/tag_list"
@@ -85,19 +44,4 @@
           android:cacheColorHint="#00000000"
           android:divider="#00000000"/>
 
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:paddingTop="8dip"
-        android:weightSum="1.0"
-        android:gravity="center"
-        android:background="#AA000000">
-
-        <Button
-            android:id="@+id/btn_AddNewTag"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="Add New Tag"/>
-    </LinearLayout>
 </LinearLayout>
