@@ -29,7 +29,7 @@ public class EntryListActivity extends BaseActivity {
 
         mActionBar.setTitle("Secret Diary");
         mActionBar.setType(ActionBar.Type.Empty);
-        mActionBar.addItem(ActionBarItem.Type.Compose, ADD_ITEM);
+        mActionBar.addItem(ActionBarItem.Type.Edit, ADD_ITEM);
 
 
         getSupportFragmentManager().beginTransaction().add(R.id.container, new EntryListFragment()).commit();

@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 import com.DGSD.SecretDiary.Data.Database;
 import com.DGSD.SecretDiary.Data.TagProvider;

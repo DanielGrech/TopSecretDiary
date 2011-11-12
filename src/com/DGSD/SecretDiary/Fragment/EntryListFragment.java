@@ -13,6 +13,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,7 +102,8 @@ public class EntryListFragment extends ListFragment implements LoaderManager.Loa
 
         setListAdapter(mAdapter);
 
-        this.getListView().setCacheColorHint(Color.TRANSPARENT);
+        getListView().setCacheColorHint(Color.TRANSPARENT);
+        getListView().setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_animation));
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.

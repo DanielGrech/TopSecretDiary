@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -25,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Utils {
+    public static final String TAG = Utils.class.getSimpleName();
 
     public static class EXTRA {
         public static final String INTERNAL = "_internal";
@@ -99,24 +101,24 @@ public class Utils {
         return inString == null || inString.length() == 0;
     }
 
-    public static File getTempFile(Context context){
-        //it will return /sdcard/SecretDiary/image.tmp
-        final File path = new File( Environment.getExternalStorageDirectory() + "/.SecretDiary/");
+    public static File getTempFile(Context context) throws FileNotFoundException{
+        //it will return /data/data/com.DGSD.SecretDiary/image.tmp
+        final File path = new File( context.getFilesDir() + "/images/");
 
         if(!path.exists() && !path.mkdirs()) {
-            return null;
+            throw new FileNotFoundException("Cant create file");
         }
 
         File retval = new File(path, "image.tmp");
         if(!retval.exists()) {
             try {
-                System.err.println("ATTEMPTING TO CREATE: " + retval.getAbsolutePath());
+                Log.d(TAG,"Creating new temp file");
                 retval.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            System.err.println("TEMP FILE DEFINITLY EXISTS!");
+            Log.d(TAG, "Temp file already exists");
         }
         return retval;
     }
