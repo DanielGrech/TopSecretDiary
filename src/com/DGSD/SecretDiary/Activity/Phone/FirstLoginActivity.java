@@ -126,8 +126,11 @@ public class FirstLoginActivity extends BaseActivity {
 							getEncryptionKey(password)).commit();
 
 					mPrefs.edit().putBoolean(SecretDiaryApplication.KEY_HAS_LOGGED_IN_BEFORE, true).commit();
-					
-					startActivity(new Intent(FirstLoginActivity.this, EntryListChoice.class));
+
+                    Intent intent = new Intent(FirstLoginActivity.this, EntryListChoice.class);
+                    intent.putExtra(Utils.EXTRA.INTERNAL, true);
+
+					startActivity(intent);
 					finish();
 				} catch(Exception e) {
 					Toast.makeText(FirstLoginActivity.this, 
